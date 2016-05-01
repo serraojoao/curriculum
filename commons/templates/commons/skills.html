@@ -1,0 +1,53 @@
+{% load tags %}
+{% load staticfiles %}
+
+{% block skills %}
+
+<!-- Skills----------------------------------------------- -->
+<div class="row skill">
+
+	<div class="three columns header-col">
+		<h1>
+			<span>Skills</span>
+		</h1>
+	</div>
+
+	<div class="nine columns main-col">
+
+		<p>This section represents a resume of all the technologies I have been using so far. A list of
+		the programming languages, frameworks, databases, application servers and integration tools I 
+		have been working with as an IT professional, you will also see some of the tools used at an 
+		academic level.</p>
+				   
+		<div class="bars">
+
+			<ul class="skills">
+				<!-- li><span class="bar-expand photoshop"></span><em>Photoshop</em></li>
+				<li><span class="bar-expand illustrator"></span><em>Illustrator</em></li>
+				<li><span class="bar-expand wordpress"></span><em>Wordpress</em></li>
+				<li><span class="bar-expand css"></span><em>CSS</em></li>
+				<li><span class="bar-expand html5"></span><em>HTML5</em></li>
+				<li><span class="bar-expand jquery"></span><em>jQuery</em></li>  -->
+				
+				{% if category_list %}
+					{% for category in category_list %}
+						<br><h3>{{ category.category_text }}</h3>
+						
+						{% for category in category.skill_set.all %}
+						      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ category.skill_text }}<br>
+						{% endfor %}
+  
+					{% endfor %}
+				{% else %}
+					<p>No categories are available.</p>
+				{% endif %}
+			</ul>
+		</div>
+		<!-- end skill-bars -->
+
+	</div>
+	<!-- main-col end -->
+
+</div>
+<!-- End skills -->
+{% endblock %}

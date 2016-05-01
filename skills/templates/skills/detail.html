@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block nav %}{% include 'commons/nav.html' %}{% endblock %}
+
+{% block content %}
+
+
+<h1>{{ category.category_text }}</h1>
+<ul>
+	{% for category in category.skill_set.all %}
+		<li>{{ category.skill_text }}</li>
+	{% endfor %}
+</ul>
+
+{% endblock %}

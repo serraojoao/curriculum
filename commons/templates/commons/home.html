@@ -1,0 +1,34 @@
+
+{% extends 'base.html' %}
+
+{% block nav %}{% include 'commons/nav.html' %}{% endblock %}
+
+{% block content %}
+		 <div class="row banner">
+         <div class="banner-text">
+            <h1 class="responsive-headline">I'm João Serrão.</h1>
+            
+            <h3>A tech enthusiastic willing to  learn <span>new things</span>, meet <span>new people</span> and <span>cultures!</span> Work may be important but that's not all! 
+            Did enough to keep you interested?!?! <a class="smoothscroll" href="#about">Start scrolling</a>
+            and learn more <a class="smoothscroll" href="#about">about me</a>.</h3>
+
+            <hr />
+            <ul class="social">
+               <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+               <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+               <li><a href="#"><i class="fa fa-skype"></i></a></li>
+            </ul>
+         </div>
+      </div>
+{% endblock %}
+
+
+{% block about %}{% include 'commons/about.html' %}{% endblock %}
+
+{% block work %}{% include 'commons/work.html' %}{% endblock %}
+
+{% block skills %}{% include 'commons/skills.html' %}{% endblock %}
+
+{% block projects %}{% include 'commons/projects.html' %}{% endblock %}
+
+{% block contact %}{% include 'commons/contact.html' %}{% endblock %}

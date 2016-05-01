@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	<div class="inner cover">
+		<p class="lead">
+			<h1 class="cover-heading">{{ question.question_text }}</h1>
+			{% for choice in question.choice_set.all %}
+					<p class="lead">{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</p>
+			{% endfor %}
+		<p class="lead"><a href="{% url 'polls:detail' question.id %}">Vote again?</a></p>
+		</p>
+	</div>
+{% endblock %}
+
+
+
+

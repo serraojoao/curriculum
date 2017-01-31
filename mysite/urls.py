@@ -20,5 +20,5 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^commons/', include('commons.urls', namespace="commons")),
+    url(r'^', include('commons.urls', namespace="commons")),
 ]

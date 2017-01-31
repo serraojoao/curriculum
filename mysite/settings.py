@@ -76,6 +76,12 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
+PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+#STATIC_ROOT = "app-root/repo/wsgi/static"
+#STATIC_ROOT = '/'
+
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
@@ -85,21 +91,24 @@ STATICFILES_FINDERS = (
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
-DATABASES = {
-    #'default': {
-    #    'ENGINE': 'django.db.backends.sqlite3',
-    #    'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    #}
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'demo',
-        'USER': 'joaoserrao',
-        'PASSWORD': '',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
-    }
-}
+import dj_database_url
+DATABASES['default'] =  dj_database_url.config()
 
+# DATABASES = {
+#     #'default': {
+#     #    'ENGINE': 'django.db.backends.sqlite3',
+#     #    'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     #}
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'demo',
+#         'USER': 'joaoserrao',
+#         'PASSWORD': '',
+#         'HOST': '127.0.0.1',
+#         'PORT': '5432',
+#     }
+# }
+# postgres://vcfmhrhlhqwubb:2e2deb45fc5e23d13980654eabe7580811d2890806c035a1b89d7a34ff6f6031@ec2-23-21-80-230.compute-1.amazonaws.com:5432/dc1133o52i40ui
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
@@ -119,3 +128,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+EMAIL_BACKEND ='django.core.mail.backends.console.EmailBackend' 
+DEFAULT_FROM_EMAIL = 'testing@example.com'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+EMAIL_USE_TLS = False 
+EMAIL_PORT = 1025
+

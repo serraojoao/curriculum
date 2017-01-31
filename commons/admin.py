@@ -14,7 +14,7 @@
 
 from django.contrib import admin
 from django import forms
-from commons.models import Category, Skill, Job, Tasks
+from commons.models import Category, Skill, Job, Tasks, Contact
 
 
 class PageForm(forms.ModelForm):
@@ -71,8 +71,13 @@ class JobAdmin(admin.ModelAdmin):
     search_fields = ['job_title']
 
 
+class ContactAdmin(admin.ModelAdmin):
+    fieldsets = [
+        (None,                    {'fields': ['name','sender','message']}),
+    ]
+    search_fields = ['name']
 
+admin.site.register(Contact, ContactAdmin)
 admin.site.register(Category, CategoryAdmin)
-
 admin.site.register(Job, JobAdmin)
 

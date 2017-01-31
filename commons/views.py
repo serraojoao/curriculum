@@ -1,29 +1,74 @@
-from django.shortcuts import render
+from django.shortcuts import render, render_to_response
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
-from django.template.loader import render_to_string
-from django.template import RequestContext
+from django.template.loader import render_to_string, get_template
+from django.template import RequestContext, Context
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.views import generic
 from django.core.urlresolvers import reverse
+from django.core.mail import send_mail
 from django.http import HttpResponsePermanentRedirect
+from django.http import HttpResponseRedirect, HttpResponse
+from django.core.mail import send_mail
+from django.shortcuts import redirect
+from django.contrib import messages
+from django.views.decorators.csrf import csrf_protect
 
-from commons.models import Category
-from commons.models import Job
-
-class ContactView(generic.ListView):
-    #model = Question
-    template_name = 'commons/contact.html'
+from commons.models import Category, Job, Contact
+from commons.forms import ContactForm
 
 
+
+@csrf_protect
 def home(request):
+    
+    form_class = ContactForm
+    
     category_list = Category.objects.order_by('-id').reverse()
     work_list = Job.objects.order_by('-id').reverse()
-    #work_list = {1, 2, 3, 4, "sdsa" , "qweq"}
     context = {'category_list': category_list, 'work_list': work_list}
+    
+    errors = []
+    messages = []
+        
+    # new logic!
+    if request.method == 'POST':
+        form = form_class(data=request.POST)
+        
+        
+        if form.is_valid():
+            contact_name = request.POST.get('contact_name', '')
+            contact_email = request.POST.get('contact_email', '')
+            form_content = request.POST.get('content', '')
+            
+            # Add message to database
+            contact = Contact(name=contact_name, message=form_content, sender=contact_email)
+            contact.save()
+            
+    
+            # Email the message
+            template = get_template('commons/contact_template.txt')
+            mail_context = Context({
+                'contact_name': contact_name,
+                'contact_email': contact_email,
+                'content': form_content,
+            })
+            
+            content = template.render(mail_context)
+            send_mail(
+                'Subject here',
+                content,
+                'from@example.com',
+                ['to@example.com'],
+                fail_silently=False,
+            )            
+            messages.append('Form submission successful!')
+        
+        else:
+            errors.append('Form not properly submitted!')
+    
+    context = {'category_list': category_list, 'work_list': work_list, 'messages':messages, 'errors':errors}
     return render(request, 'commons/home.html', context)
-
-def detail(request, category_id):
-    category = get_object_or_404(Category, pk=category_id)
-    return render (request, 'commons/detail.html', {'category': category})
+  
+    

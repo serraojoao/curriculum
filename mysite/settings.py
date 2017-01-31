@@ -92,7 +92,7 @@ STATICFILES_FINDERS = (
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
 import dj_database_url
-DATABASES['default'] =  dj_database_url.config()
+DATABASE_URL['default'] =  dj_database_url.config()
 
 # DATABASES = {
 #     #'default': {

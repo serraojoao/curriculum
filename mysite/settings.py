@@ -94,7 +94,11 @@ STATICFILES_FINDERS = (
 import dj_database_url
 #db_from_env = dj_database_url.config(conn_max_age=500)
 #DATABASES['default'].update(db_from_env)
+DATABASES = {}
+#DATABASES['default'] =  dj_database_url.config(default='postgres://user:pass@host/db')
 DATABASES['default'] = dj_database_url.config()
+DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2'
+
 #DATABASES['default'] =  dj_database_url.config()
 #DATABASE_URL['default'] =  dj_database_url.config()
 

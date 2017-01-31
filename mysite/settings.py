@@ -78,7 +78,7 @@ STATICFILES_DIRS = (
 )
 
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+#STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 #STATIC_ROOT = "app-root/repo/wsgi/static"
 #STATIC_ROOT = '/'
 

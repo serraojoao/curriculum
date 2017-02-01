@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import dj_database_url
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -91,11 +92,7 @@ STATICFILES_FINDERS = (
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
-import dj_database_url
-#db_from_env = dj_database_url.config(conn_max_age=500)
-#DATABASES['default'].update(db_from_env)
 DATABASES = {}
-#DATABASES['default'] =  dj_database_url.config(default='postgres://user:pass@host/db')
 DATABASES['default'] = dj_database_url.config()
 DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2'
 

@@ -68,17 +68,17 @@ def home(request):
 #             )
             
             
-            sg = sendgrid.SendGridAPIClient(apikey=os.environ.get('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'))
-            from_email = Email("test@example.com")
-            to_email = Email("serraojoao@hotmail.com")
-            subject = "Sending with SendGrid is Fun"
-            content = Content("text/plain", "and easy to do anywhere, even with Python")
-            mail = Mail(from_email, subject, to_email, content)
-            response = sg.client.mail.send.post(request_body=mail.get())
-            print(response.status_code)
-            print(response.body)
-            print(response.headers)
-            
+#             sg = sendgrid.SendGridAPIClient(apikey=os.environ.get('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'))
+#             from_email = Email("test@example.com")
+#             to_email = Email("serraojoao@hotmail.com")
+#             subject = "Sending with SendGrid is Fun"
+#             content = Content("text/plain", "and easy to do anywhere, even with Python")
+#             mail = Mail(from_email, subject, to_email, content)
+#             response = sg.client.mail.send.post(request_body=mail.get())
+#             print(response.status_code)
+#             print(response.body)
+#             print(response.headers)
+#             
             
             
             

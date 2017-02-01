@@ -1,3 +1,7 @@
+import sendgrid
+import os
+from sendgrid.helpers.mail import *
+
 from django.shortcuts import render, render_to_response
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
@@ -18,9 +22,7 @@ from django.views.decorators.csrf import csrf_protect
 from commons.models import Category, Job, Contact
 from commons.forms import ContactForm
 
-# import sendgrid
-# import os
-# from sendgrid.helpers.mail import *
+
 
 
 @csrf_protect
@@ -67,24 +69,20 @@ def home(request):
 #                 ['to@example.com'],
 #                 fail_silently=False,
 #             )
+
             
-            
-#             sg = sendgrid.SendGridAPIClient(apikey=os.environ.get('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'))
-#             from_email = Email("test@example.com")
-#             to_email = Email("serraojoao@hotmail.com")
-#             subject = "Sending with SendGrid is Fun"
-#             content = Content("text/plain", "and easy to do anywhere, even with Python")
-#             mail = Mail(from_email, subject, to_email, content)
-#             response = sg.client.mail.send.post(request_body=mail.get())
-#             print(response.status_code)
-#             print(response.body)
-#             print(response.headers)
-#             
-            
-            
-            
-            
-            
+            sg = sendgrid.SendGridAPIClient(apikey=os.environ.get('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'))
+            from_email = Email("test@example.com")
+            to_email = Email("serraojoao@hotmail.com")
+            subject = "Sending with SendGrid is Fun"
+            content = Content("text/plain", "and easy to do anywhere, even with Python")
+            mail = Mail(from_email, subject, to_email, content)
+            response = sg.client.mail.send.post(request_body=mail.get())
+            print(response.status_code)
+            print(response.body)
+            print(response.headers)
+             
+    
                         
             messages.append('Form submission successful!')
         

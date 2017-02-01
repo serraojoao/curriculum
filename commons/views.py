@@ -18,6 +18,9 @@ from django.views.decorators.csrf import csrf_protect
 from commons.models import Category, Job, Contact
 from commons.forms import ContactForm
 
+import sendgrid
+import os
+from sendgrid.helpers.mail import *
 
 
 @csrf_protect
@@ -47,22 +50,41 @@ def home(request):
             contact.save()
             
     
-            # Email the message
-            template = get_template('commons/contact_template.txt')
-            mail_context = Context({
-                'contact_name': contact_name,
-                'contact_email': contact_email,
-                'content': form_content,
-            })
+#             # Email the message
+#             template = get_template('commons/contact_template.txt')
+#             mail_context = Context({
+#                 'contact_name': contact_name,
+#                 'contact_email': contact_email,
+#                 'content': form_content,
+#             })
+#             
+#             content = template.render(mail_context)
+#             send_mail(
+#                 'Subject here',
+#                 content,
+#                 'from@example.com',
+#                 ['to@example.com'],
+#                 fail_silently=False,
+#             )
             
-            content = template.render(mail_context)
-            send_mail(
-                'Subject here',
-                content,
-                'from@example.com',
-                ['to@example.com'],
-                fail_silently=False,
-            )            
+            
+            sg = sendgrid.SendGridAPIClient(apikey=os.environ.get('SENDGRID_API_KEY'))
+            from_email = Email("test@example.com")
+            to_email = Email("serraojoao@hotmail.com")
+            subject = "Sending with SendGrid is Fun"
+            content = Content("text/plain", "and easy to do anywhere, even with Python")
+            mail = Mail(from_email, subject, to_email, content)
+            response = sg.client.mail.send.post(request_body=mail.get())
+            print(response.status_code)
+            print(response.body)
+            print(response.headers)
+            
+            
+            
+            
+            
+            
+                        
             messages.append('Form submission successful!')
         
         else:
@@ -72,3 +94,20 @@ def home(request):
     return render(request, 'commons/home.html', context)
   
     
+    
+    
+# import sendgrid
+# import os
+# from sendgrid.helpers.mail import *
+# 
+# sg = sendgrid.SendGridAPIClient(apikey=os.environ.get('SENDGRID_API_KEY'))
+# from_email = Email("test@example.com")
+# to_email = Email("test@example.com")
+# subject = "Sending with SendGrid is Fun"
+# content = Content("text/plain", "and easy to do anywhere, even with Python")
+# mail = Mail(from_email, subject, to_email, content)
+# response = sg.client.mail.send.post(request_body=mail.get())
+# print(response.status_code)
+# print(response.body)
+# print(response.headers)
+

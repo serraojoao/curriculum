@@ -72,7 +72,7 @@ def home(request):
 
             
             sg = sendgrid.SendGridAPIClient(apikey=os.environ.get('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'))
-            from_email = Email("test@example.com")
+            from_email = Email("app50217660@heroku.com")
             to_email = Email("serraojoao@hotmail.com")
             subject = "Sending with SendGrid is Fun"
             content = Content("text/plain", "and easy to do anywhere, even with Python")

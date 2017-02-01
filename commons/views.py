@@ -18,9 +18,9 @@ from django.views.decorators.csrf import csrf_protect
 from commons.models import Category, Job, Contact
 from commons.forms import ContactForm
 
-import sendgrid
-import os
-from sendgrid.helpers.mail import *
+# import sendgrid
+# import os
+# from sendgrid.helpers.mail import *
 
 
 @csrf_protect
@@ -30,6 +30,7 @@ def home(request):
     
     category_list = Category.objects.order_by('-id').reverse()
     work_list = Job.objects.order_by('-id').reverse()
+    
     context = {'category_list': category_list, 'work_list': work_list}
     
     errors = []

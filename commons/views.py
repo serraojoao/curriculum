@@ -68,7 +68,7 @@ def home(request):
 #             )
             
             
-            sg = sendgrid.SendGridAPIClient(apikey=os.environ.get('SENDGRID_API_KEY'))
+            sg = sendgrid.SendGridAPIClient(apikey=os.environ.get('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'))
             from_email = Email("test@example.com")
             to_email = Email("serraojoao@hotmail.com")
             subject = "Sending with SendGrid is Fun"

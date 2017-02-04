@@ -75,9 +75,7 @@ def home(request):
             from_email = Email("app50217660@heroku.com")
             to_email = Email("serraojoao@hotmail.com")
             subject = "I've seen your Website!"
-            content = Content("text/plain", form_content + 
-                              + contact_name + "(" + contact_email + ")")
-            
+            content = Content("text/plain", form_content + "\n  --- User info: " + contact_name + "(" + contact_email + ")")
             
             
             mail = Mail(from_email, subject, to_email, content)
